@@ -1,34 +1,34 @@
 /*
- * @xkx https://github.com/jialezi/img2ipfs/
+ * @orange2008 https://github.com/orange2008/ipfs-img
  */
 $(() => {
-    /* 临时粘贴上传 */
+    /* Temporary paste to upload */
     $(document).on('paste', event => {
         let clipboardData = event.clipboardData || window.clipboardData || event.originalEvent.clipboardData;
-        /* 判断是否支持粘贴上传 */
-        if (!clipboardData || !clipboardData.items) return alert('当前浏览器不支持粘贴上传');
+        /* Making decisions if the browser supports paste upload */
+        if (!clipboardData || !clipboardData.items) return alert("Current browser doesn't support paste to upload");
         let items = clipboardData.items;
         let file = null;
-        /* 判断剪切板的内容是否是桌面类型的文件 */
-        if (items.length === 0) return alert('剪切板内无内容或不支持桌面文件');
-        /* 开始循环剪切板的内容，判断是否是文件类型，如果是文件类型，则push */
+        /* Make decisions if clipboard has contents */
+        if (items.length === 0) return alert("There's nothing in your clipboard");
+        /* Upload files */
         for (let i = 0; i < items.length; i++) {
             if (items[i].type.indexOf('image') !== -1) {
                 file = items[i].getAsFile();
             }
         }
-        if (!file) return alert('剪切板内无内容或不支持桌面文件');
+        if (!file) return alert("There's nothing in your clipboard.");
         upload(new Array(file));
     });
-    /* 点击上传 */
+    /* Click to upload */
     $('.upload .content').on('click', function () {
         $('#file').click();
     });
-    /* 监听点击上传 */
+    /* Monitoring click to upload */
     $('#file').on('change', () => {
         upload($('#file')[0].files);
     });
-    /* 拖拽上传 */
+    /* Drag and drop */
     $('#dragbox').on('dragover', e => {
         e.preventDefault();
     });
@@ -46,9 +46,9 @@ $(() => {
         let files = e.originalEvent.dataTransfer.files;
         upload(files);
     });
-    /* 上传函数 */
+    /* Upload */
     function upload(files) {
-        //if ($('#type').val().trim() === '') return alert('请输入');
+        //if ($('#type').val().trim() === '') return alert('Please input');
         for (let i = 0; i < files.length; i++) {
             var animateimg = files[i].name;
  	        var imgarr=animateimg.split('\\');
@@ -59,11 +59,11 @@ $(() => {
  	        if(!file){return false;}
  	        var fileSize = file.size;
             var maxSize = 5242880*20;
-            if(ext !='.PNG' && ext !='.GIF' && ext !='.JPG' && ext !='.JPEG' && ext !='.BMP'&& ext !='.SVG'&& ext !='.TIF'&& ext !='.ICO'&& ext !='.3GP'&& ext !='.AVI'&& ext !='.FLV'&& ext !='.MOV'&& ext !='.MKV'&& ext !='.MP4'&& ext !='.MP3'&& ext !='.FLAC'&& ext !='.WEBP'&& ext !='.MPG'&& ext !='.MPEG'&& ext !='.M3U8'&& ext !='.RM'&& ext !='.RMVB'&& ext !='.TS'&& ext !='.wmv'&& ext !='.asf'&& ext !='.webm'&& ext !='.ogg'&& ext !='.ACC'&& ext !='.M4A'&& ext !='.APE'&& ext !='.TXT'&& ext !='.JSON'&& ext !='.DOC'&& ext !='.DOCX'&& ext !='.XLS'&& ext !='.XLSX'&& ext !='.CSV'&& ext !='.SQL'&& ext !='.BAK'&& ext !='.PPT'&& ext !='.PPTX'&& ext !='.ZIP'&& ext !='.RAR'&& ext !='.7Z'&& ext !='.GZ'&& ext !='.TAR'&& ext !='.ISO'&& ext !='.MD'&& ext !='.SH'){  
- 		        parent.alert('文件类型错误,请上传图片类型');
+            if(ext == ".MALWARE"){  
+ 		        parent.alert('Incorrect file format!');
  		        $('#file').val(null);return false;  
  	        }else if(parseInt(fileSize) >= parseInt(maxSize)){  
- 		        parent.alert('上传的文件不能超过'+maxSize/1024/1024+'MB');return false;  
+ 		        parent.alert('File size cannot exceed '+maxSize/1024/1024+'MB');return false;  
  	        }else{
  	        document.querySelector('.container').classList.add('start')
  	        var type = $('#id');
@@ -87,7 +87,7 @@ $(() => {
                                 <path d="M82.603621 941.396379A280.234044 280.234044 0 0 1 0.001138 742.001267a280.063378 280.063378 0 0 1 82.659372-199.110669l145.919675-145.919676a46.535008 46.535008 0 0 1 65.820299 0 46.535008 46.535008 0 0 1 0 65.820298L148.480808 608.710896a187.732916 187.732916 0 0 0-55.352766 133.574814 187.732916 187.732916 0 0 0 55.352766 133.517926 187.732916 187.732916 0 0 0 133.574814 55.352766A187.732916 187.732916 0 0 0 415.289104 875.519192l145.919676-145.919676a46.535008 46.535008 0 0 1 65.820298 0 46.535008 46.535008 0 0 1 0 65.820299l-145.862787 145.919675A280.347821 280.347821 0 0 1 281.998733 1023.998862a280.120266 280.120266 0 0 1-199.395112-82.602483z m292.408239-292.465128a46.42123 46.42123 0 0 1 0-65.820298l208.099093-208.042204a46.478119 46.478119 0 0 1 65.820298 0 46.535008 46.535008 0 0 1 0 65.820298l-208.099093 208.042204a46.42123 46.42123 0 0 1-32.938593 13.653303 46.307453 46.307453 0 0 1-32.824816-13.653303z m354.587656-21.674618a46.535008 46.535008 0 0 1 0-65.820298L875.576081 415.289104a187.732916 187.732916 0 0 0 55.352766-133.517926 187.732916 187.732916 0 0 0-55.352766-133.517925 187.732916 187.732916 0 0 0-133.574814-55.352766 187.334695 187.334695 0 0 0-133.517926 55.352766L462.506777 294.172929a46.591896 46.591896 0 0 1-65.820299 0 46.591896 46.591896 0 0 1 0-65.820299l145.976565-145.919675A279.9496 279.9496 0 0 1 742.001267 0.001138a280.120266 280.120266 0 0 1 199.110668 82.602483A280.290933 280.290933 0 0 1 1023.998862 281.998733a280.120266 280.120266 0 0 1-82.602483 199.110669l-145.919676 145.919676a46.42123 46.42123 0 0 1-32.881704 13.596414 46.535008 46.535008 0 0 1-32.938594-13.368859z" p-id="8129" fill="#909399"></path>
                             </svg>
                         </a>
-						<a title="删除" class="link" onclick="del(this);return false;">
+						<a title="Delete" class="link" onclick="del(this);return false;">
                             <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50.13 50.13" style="enable-background:new 0 0 50.13 50.13;" xml:space="preserve">
 								<g>
 								<path style="fill:#010002;" d="M4.574,13.902h40.982c0.345,0,0.625-0.28,0.625-0.625V8.952c0-0.345-0.28-0.625-0.625-0.625H33.315		V0.625C33.315,0.28,33.035,0,32.69,0H17.442c-0.345,0-0.625,0.28-0.625,0.625v7.702H4.574c-0.345,0-0.625,0.28-0.625,0.625v4.325 C3.949,13.622,4.23,13.902,4.574,13.902z M5.199,9.577h12.242c0.345,0,0.625-0.28,0.625-0.625V1.25h13.998v7.702		c0,0.345,0.28,0.625,0.625,0.625h12.242v3.075H5.199V9.577z"/>
@@ -144,7 +144,7 @@ $(() => {
                 },
                 success: res => {
                     var imgSrc = 'https://ipfs-1.frank-ruan.com/ipfs/'+res.Hash
-                    /* 清除input框 */
+                    /* Clean 'input' box */
                     $('#file').val(null);
                     if (res.code === -1) {
                         $('.' + randomClass).fadeOut();
@@ -163,7 +163,7 @@ $(() => {
                                     href: imgSrc,
                                     target: '_blank'
                                 });
-                            //代码链接xkx
+                            // Code link
                             $('.' + randomClass)
                                 .find('#Imgs_url')
                                 .attr({
@@ -184,7 +184,7 @@ $(() => {
                                 .attr({
                                     value: '![]('+imgSrc+')'
                                 });
-                            //显示链接xkx
+                            // Display link
                             $('.' + randomClass)
                                 .find('#show')
                                 .show();
@@ -193,10 +193,10 @@ $(() => {
                                 .attr({
                                     value: imgSrc
                                 });
-                            //复制所有xkx
+                            // Copy all links
                             $('.copyall')
                                 .show();
-                            var tt = $('.filelist .title').html().replace('上传列表', '');
+                            var tt = $('.filelist .title').html().replace('Upload queue', '');
                             $('.filelist .title').html(tt);
                         } else {
                             $('.' + randomClass)
@@ -211,7 +211,7 @@ $(() => {
                             $('.' + randomClass)
                                 .find('#show')
                                 .attr({
-                                    value: "上传出错！"
+                                    value: "Something went wrong with your upload"
                                 });
                         }
                     }
@@ -223,7 +223,7 @@ $(() => {
  	        }
         }
     }
-    /* 获取文件大小 */
+    /* Get file size */
     function formatBytes(bytes, decimals = 2) {
         if (bytes === 0) return '0 Bytes';
         const k = 1024;
@@ -263,13 +263,13 @@ function copyAll(obj){
 	document.body.removeChild(txa);
 	console.log('copy success');
 	console.log(xkx);
-	if (browserRedirect()) {alert('设备类型为手机，有一定几率复制失败！请查看剪切板是否成功复制');}
+	if (browserRedirect()) {alert("Your device is a mobile phone, may be it's not in your clipboard.");}
 }
 function oCopy(obj){
 	obj.select();
 	document.execCommand("Copy");
 	console.log(obj.value);
-	if (browserRedirect()) {alert('设备类型为手机，有一定几率复制失败！请查看剪切板是否成功复制');}
+	if (browserRedirect()) {alert("Your device is a mobile phone, may be it's not in your clipboard.");}
 }
 function browserRedirect(){
     var sUserAgent = navigator.userAgent.toLowerCase();
